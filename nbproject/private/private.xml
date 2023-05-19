@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Entidades/platterModel.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Main/MainTicket.java</file>
             <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Main/CreateTicket.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/DAO/ClsFacturas.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/DAO/ClsDetallesFactura.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Entidades/invoiceDetailModel.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Entidades/invoiceModel.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Conexion/Conexion.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Entidades/orderDetailModel.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/DAO/clsOrder.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Entidades/orderModel.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/DAO/ClsInvoice.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Main/CreateTickectOrder.java</file>
         </group>
     </open-files>
 </project-private>
