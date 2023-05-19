@@ -35,37 +35,39 @@ public class clsOrder {
         return orders;
     }
  
-    public ArrayList<orderDetailModel> obtenerOrdenes(int orderId) throws SQLException {
-        ArrayList<orderDetailModel> ordenes = new ArrayList<>();
+  public ArrayList<orderDetailModel> obtenerOrdenes(int orderId) {
+    ArrayList<orderDetailModel> ordenes = new ArrayList<>();
 
+    try {
+        CallableStatement statement = conectar.prepareCall("CALL SP_ORDERDATA(?)");
+        statement.setInt(1, orderId);
+        ResultSet resultSet = statement.executeQuery();
 
-            try {
-            CallableStatement statement = conectar.prepareCall("CALL SP_ORDERDATA(?)");
-            statement.setInt("pId", orderId);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                orderDetailModel order = new orderDetailModel();
-                order.setOrderId(resultSet.getInt("orderId"));
-                order.setOrderTime(resultSet.getTime("orderTime"));
-                order.setOrderDate(resultSet.getDate("orderDate"));
-                order.setOrderType(resultSet.getInt("orderType"));
-                order.setAddress(resultSet.getString("address"));
-                order.setNumberPhone(resultSet.getString("numberPhone"));
-                order.setCustomer(resultSet.getString("customer"));
-                order.setUser(resultSet.getString("userName"));
-                 order.setNumberTable(resultSet.getInt("tableNumber"));
-                order.setOtherDetail(resultSet.getString("otherDetail"));
-                order.setPlatterName(resultSet.getString("platterName"));
-                order.setPlatterPrice(resultSet.getDouble("platterPrice"));
-                ordenes.add(order);
-                           }
-        } catch (Exception e){
-            System.out.println(e);
+        while (resultSet.next()) {
+            orderDetailModel order = new orderDetailModel();
+            order.setOrderId(resultSet.getInt("orderId"));
+            order.setOrderTime(resultSet.getTime("orderTime"));
+            order.setOrderDate(resultSet.getDate("orderDate"));
+            order.setOrderType(resultSet.getInt("orderType"));
+            order.setAddress(resultSet.getString("address"));
+            order.setNumberPhone(resultSet.getString("numberPhone"));
+            order.setCustomer(resultSet.getString("customer"));
+            order.setUser(resultSet.getString("userName"));
+            if (resultSet.getInt("orderType") == 0) {
+                order.setNumberTable(resultSet.getInt("tableNumber"));
+            }
+            order.setOtherDetail(resultSet.getString("otherDetail"));
+            order.setPlatterName(resultSet.getString("platterName"));
+            order.setPlatterPrice(resultSet.getDouble("platterPrice"));
+            ordenes.add(order);
         }
-
-        return ordenes;
+    } catch (Exception e) {
+        System.out.println("Error obteniendo los datos: " + e);
     }
+
+    return ordenes;
+}
+
 
     public void updateOrder(int id){
         

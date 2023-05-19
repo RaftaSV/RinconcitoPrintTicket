@@ -25,15 +25,37 @@ public class MainTicket {
         String idTicket = null;
         int idOrder = 0;
         clsOrder order = new clsOrder();
+        startReact react = new startReact();
+        startNode node = new startNode();
+         Thread nodeThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Iniciar servidor Node.js con yarn dev
+                try {
+                    node.iniciarServidorNodeJS();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                
+            }
+        });
 
+        Thread reactThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Iniciar aplicación React.js con yarn start
+                try {
+                   react.iniciarAplicacionReactJS();  
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+               
+            }
+        });
+
+        nodeThread.start();
+        reactThread.start();
         try {
-             // Iniciar aplicación React.js con yarn start
-            iniciarAplicacionReactJS();
-            // Iniciar servidor Node.js con yarn dev
-            iniciarServidorNodeJS();
-
-         
-            // Resto del código...
             try (CallableStatement call = conectar.prepareCall("call SP_S_NUMTICKET()")) {
                 while (true) {
                     Thread.sleep(500);
@@ -78,55 +100,5 @@ public class MainTicket {
         }
     }
 
-    private static void iniciarServidorNodeJS() throws IOException {
-    String directorioServidorNodeJS = "D:\\Descargas\\PruebaDev\\NodeYRender";
-    String comandoServidorNodeJS = "yarn dev";
-
-    // Navegar al directorio del servidor Node.js
-    File dirServidorNodeJS = new File(directorioServidorNodeJS);
-    CommandLine cambioDirectorio = new CommandLine("cmd");
-    cambioDirectorio.addArgument("/c");
-    cambioDirectorio.addArgument("cd");
-    cambioDirectorio.addArgument(dirServidorNodeJS.getAbsolutePath());
-
-    // Ejecutar el comando yarn dev para iniciar el servidor Node.js
-    CommandLine iniciarServidor = new CommandLine("cmd");
-    iniciarServidor.addArgument("/c");
-    iniciarServidor.addArgument(comandoServidorNodeJS);
-
-    // Ejecutar los comandos utilizando commons-exec
-    DefaultExecutor executor = new DefaultExecutor();
-    executor.setWorkingDirectory(dirServidorNodeJS);
-    executor.execute(cambioDirectorio);
-    executor.execute(iniciarServidor);
-
-    System.out.println("Servidor Node.js iniciado exitosamente.");
-}
-
-
-   private static void iniciarAplicacionReactJS() throws IOException {
-    String directorioAplicacionReactJS = "D:\\Descargas\\PruebaDev\\RinconcitoFrontEnd";
-    String comandoAplicacionReactJS = "yarn start";
-
-    // Navegar al directorio de la aplicación React.js
-    File dirAplicacionReactJS = new File(directorioAplicacionReactJS);
-    CommandLine cambioDirectorio = new CommandLine("cmd");
-    cambioDirectorio.addArgument("/c");
-    cambioDirectorio.addArgument("cd");
-    cambioDirectorio.addArgument(dirAplicacionReactJS.getAbsolutePath());
-
-    // Ejecutar el comando yarn start para iniciar la aplicación React.js
-    CommandLine iniciarAplicacion = new CommandLine("cmd");
-    iniciarAplicacion.addArgument("/c");
-    iniciarAplicacion.addArgument(comandoAplicacionReactJS);
-
-    // Ejecutar los comandos utilizando commons-exec
-    DefaultExecutor executor = new DefaultExecutor();
-    executor.setWorkingDirectory(dirAplicacionReactJS);
-    executor.execute(cambioDirectorio);
-    executor.execute(iniciarAplicacion);
-
-    System.out.println("Aplicación React.js iniciada exitosamente.");
-}
 
 }

@@ -1,8 +1,6 @@
 package com.Rincon.Main;
 
 import com.Rincon.DAO.*;
-import com.Rincon.Entidades.invoiceModel;
-import com.Rincon.Entidades.invoiceDetailModel;
 import com.Rincon.Entidades.orderDetailModel;
 import java.io.*;
 import java.nio.file.Files;
@@ -34,7 +32,6 @@ public class CreateTickectOrder {
             String otherDetail = null;
             int tableNumber = 0;
             double total = 0;
-
             for (orderDetailModel i : newOrder) {
                 orderId = i.getOrderId();
                 orderTime = i.getOrderTime();
@@ -70,7 +67,8 @@ public class CreateTickectOrder {
 
     private void buildHeader(
             StringBuilder builder,
-            Date orderDate, Time orderTime,
+            Date orderDate, 
+            Time orderTime,
             int orderId, int orderType,
             int tableNumber,
             String userName,
