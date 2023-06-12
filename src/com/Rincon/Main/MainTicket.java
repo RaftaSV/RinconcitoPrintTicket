@@ -13,15 +13,13 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
 
 public class MainTicket {
     public static void main(String[] args) {
         Conexion con = new Conexion();
         Connection conectar = con.retornarConexion();
         CreateTicket create = new CreateTicket();
-        CreateTickectOrder createTicketOrder = new CreateTickectOrder();
+        CreateTicketOrder createTicketOrder = new CreateTicketOrder();
         String idTicket = null;
         int idOrder = 0;
         clsOrder order = new clsOrder();
@@ -32,7 +30,7 @@ public class MainTicket {
             public void run() {
                 // Iniciar servidor Node.js con yarn dev
                 try {
-                    node.iniciarServidorNodeJS();
+                  // node.iniciarServidorNodeJS();
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -45,7 +43,7 @@ public class MainTicket {
             public void run() {
                 // Iniciar aplicación React.js con yarn start
                 try {
-                   react.iniciarAplicacionReactJS();  
+                  // react.iniciarAplicacionReactJS();  
                 } catch (Exception e) {
                     System.out.println(e);
                 }

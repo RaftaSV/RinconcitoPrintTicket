@@ -10,14 +10,13 @@ import java.text.DecimalFormat;
 import java.util.*;
 import javax.print.*;
 
-public class CreateTickectOrder {
+public class CreateTicketOrder {
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public void imprimir(int id) {
         try {
             StringBuilder builder = new StringBuilder();
-            byte[] cutP = new byte[]{0x1d, 'V', 1};
 
             clsOrder order = new clsOrder();
             ArrayList<orderDetailModel> newOrder = order.obtenerOrdenes(id);
@@ -59,7 +58,7 @@ public class CreateTickectOrder {
             }
 
             imprimirArchivo(filePath);
-            cutPaper(cutP);
+
         } catch (Exception e) {
             System.out.println("Error al imprimir: " + e.getMessage());
         }
@@ -67,37 +66,38 @@ public class CreateTickectOrder {
 
     private void buildHeader(
             StringBuilder builder,
-            Date orderDate, 
+            Date orderDate,
             Time orderTime,
-            int orderId, int orderType,
+            int orderId,
+            int orderType,
             int tableNumber,
             String userName,
             String customer) {
-        builder.append("             El Rincocito Mexicano        \n");
-        builder.append("                Orden numero: ").append(orderId).append("\n");
-        builder.append("                Fecha: ").append(orderDate.toString()).append("\n");
-        builder.append("                 Hora: ").append(orderTime.toLocalTime()).append("\n");
-        builder.append("               Mesero: ").append(userName).append("\n");
+        builder.append("            El Rincocito Mexicano     \n");
+        builder.append("               Orden numero: ").append(orderId).append("\n");
+        builder.append("               Fecha: ").append(orderDate.toString()).append("\n");
+        builder.append("               Hora: ").append(orderTime.toLocalTime()).append("\n");
+        builder.append("             Mesero: ").append(userName).append("\n");
         if (orderType == 0) {
-        builder.append("             Servicio en mesa: ").append(tableNumber).append("\n");
+            builder.append("            Servicio en mesa: ").append(tableNumber).append("\n");
             if (customer.length() > 0) {
-                builder.append("              Cliente: ").append(customer).append("\n");
+                builder.append("          Cliente: ").append(customer).append("\n");
             }
         } else if (orderType == 1) {
-            builder.append("              servicio para llevar       ").append("\n");
+            builder.append("            Servicio para llevar    ").append("\n");
             if (customer.length() > 0) {
-                builder.append("              Cliente: ").append(customer).append("\n");
+                builder.append("            Cliente: ").append(customer).append("\n");
             }
         } else {
-            builder.append("             Servicio a domicilio        \n");
+            builder.append("          Servicio a domicilio    \n");
             if (customer.length() > 0) {
-                builder.append("              Cliente: ").append(customer).append("\n");
+                builder.append("    Cliente: ").append(customer).append("\n");
             }
 
         }
-        builder.append("-----------------------------------------------\n");
-        builder.append("                                               \n");
-        builder.append("DESCRIPCION                            PRECIO  \n");
+        builder.append("------------------------------------------\n");
+        builder.append("                                 \n");
+        builder.append("DESCRIPCION                        PRECIO  \n");
     }
 
     private void buildBody(StringBuilder builder, ArrayList<orderDetailModel> detalle) {
@@ -106,12 +106,12 @@ public class CreateTickectOrder {
             String producName = " " + i.getPlatterName().replace("ñ", "n");
             String unitPrice = " " + String.valueOf(df.format(i.getPlatterPrice()));
 
-            if (producName.length() < 37) {
-                while (producName.length() <= 37) {
+            if (producName.length() < 32) {
+                while (producName.length() <= 32) {
                     producName = producName + " ";
                 }
             } else {
-                producName = i.getPlatterName().substring(0, 36) + " ";
+                producName = i.getPlatterName().substring(0, 31) + " ";
             }
             if (unitPrice.length() < 6) {
                 while (unitPrice.length() <= 6) {
@@ -123,31 +123,35 @@ public class CreateTickectOrder {
         }
     }
 
-    private void buildFooter(StringBuilder builder, double total, int orderType, String numberPhone, String address, String otherDetail) {
+    private void buildFooter(
+            StringBuilder builder,
+            double total,
+            int orderType,
+            String numberPhone,
+            String address,
+            String otherDetail) {
         builder.append("\n");
-
-        builder.append("                                Total: $").append(String.valueOf(df.format(total))).append("\n");
-        builder.append("\n");
+        builder.append("Total de la orden: $").append(String.valueOf(df.format(total))).append("\n");
         if (orderType == 2) {
             builder.append("\n");
             builder.append("Numero de telefono: ").append(numberPhone).append("\n");
-           builder.append("\n");
-            builder.append("                  Direccion             ").append("\n");
-            if (address.length() > 46) {
-                int numLineasDireccion = (int) Math.ceil(address.length() / 46.0);
+            builder.append("\n");
+            builder.append("          Direccion         ").append("\n");
+            if (address.length() > 41) {
+                int numLineasDireccion = (int) Math.ceil(address.length() / 41.0);
                 for (int i = 0; i < numLineasDireccion; i++) {
-                    int endIndex = Math.min((i + 1) * 46, address.length());
-                    String lineaDireccion = address.substring(i * 46, endIndex);
+                    int endIndex = Math.min((i + 1) * 41, address.length());
+                    String lineaDireccion = address.substring(i * 41, endIndex);
                     builder.append(lineaDireccion).append("\n");
                 }
             }
-             builder.append("\n");
-            builder.append("                Otros Detalles          ").append("\n");
-            if (otherDetail.length() > 46) {
-                int numLineasDetalles = (int) Math.ceil(otherDetail.length() / 46.0);
+            builder.append("\n");
+            builder.append("               Otros Detalles      ").append("\n");
+            if (otherDetail.length() > 41) {
+                int numLineasDetalles = (int) Math.ceil(otherDetail.length() / 41.0);
                 for (int i = 0; i < numLineasDetalles; i++) {
-                    int startIndex = i * 46;
-                    int endIndex = Math.min(startIndex + 46, otherDetail.length());
+                    int startIndex = i * 41;
+                    int endIndex = Math.min(startIndex + 41, otherDetail.length());
                     String lineaDetalles = otherDetail.substring(startIndex, endIndex);
                     builder.append(lineaDetalles).append("\n");
                 }
@@ -155,19 +159,25 @@ public class CreateTickectOrder {
 
         } else {
             if (otherDetail.length() > 0) {
-               builder.append("\n");
-                builder.append("                Otros Detalles          ").append("\n");
-                if (otherDetail.length() > 46) {
-                    int numLineasDetalles = (int) Math.ceil(otherDetail.length() / 46.0);
+                builder.append("\n");
+              builder.append("               Otros Detalles      ").append("\n");
+                if (otherDetail.length() > 41) {
+                    int numLineasDetalles = (int) Math.ceil(otherDetail.length() / 41.0);
                     for (int i = 0; i < numLineasDetalles; i++) {
-                        int startIndex = i * 46;
-                        int endIndex = Math.min(startIndex + 46, otherDetail.length());
+                        int startIndex = i * 41;
+                        int endIndex = Math.min(startIndex + 41, otherDetail.length());
                         String lineaDetalles = otherDetail.substring(startIndex, endIndex);
                         builder.append(lineaDetalles).append("\n");
                     }
                 }
             }
         }
+        builder.append("\n");
+        builder.append("\n");
+        builder.append("\n");
+        builder.append("\n");
+        builder.append("\n");
+        builder.append("\n");
     }
 
     private void imprimirArchivo(String filePath) {
@@ -191,6 +201,8 @@ public class CreateTickectOrder {
             DocPrintJob printJob = defaultPrintService.createPrintJob();
             try {
                 printJob.print(document, null);
+                byte[] cutP = new byte[]{0x1d, 'V', 1};
+                cutPaper(cutP);
             } catch (PrintException ex) {
                 ex.printStackTrace();
             }

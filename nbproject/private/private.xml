@@ -3,14 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Main/MainTicket.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Main/CreateTicket.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Conexion/Conexion.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Entidades/orderDetailModel.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/DAO/clsOrder.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Entidades/orderModel.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/DAO/ClsInvoice.java</file>
-            <file>file:/C:/Users/Rafta/OneDrive/Documents/NetBeansProjects/TicketRInconcito/src/com/Rincon/Main/CreateTickectOrder.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/GitHub/RInconcitoFrontEnd/RinconcitoPrintTicket/src/com/Rincon/Main/startReact.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/GitHub/RInconcitoFrontEnd/RinconcitoPrintTicket/src/com/Rincon/Main/MainTicket.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/GitHub/RInconcitoFrontEnd/RinconcitoPrintTicket/src/com/Rincon/Main/CreateTicket.java</file>
+            <file>file:/C:/Users/Rafta/OneDrive/Documents/GitHub/RInconcitoFrontEnd/RinconcitoPrintTicket/src/com/Rincon/Main/CreateTicketOrder.java</file>
         </group>
     </open-files>
 </project-private>
