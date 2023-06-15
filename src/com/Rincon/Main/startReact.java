@@ -16,7 +16,7 @@ import org.apache.commons.exec.DefaultExecutor;
 public class startReact {
     
     public static void iniciarAplicacionReactJS() throws IOException {
-    String directorioAplicacionReactJS = "D:\\Descargas\\PruebaDev\\RinconcitoFrontEnd";
+    String directorioAplicacionReactJS = "D:/Descargas/PruebaDev/RinconcitoFrontEnd";
     String comandoAplicacionReactJS = "yarn start";
 
     // Navegar al directorio de la aplicación React.js

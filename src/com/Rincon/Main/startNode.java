@@ -15,7 +15,7 @@ import org.apache.commons.exec.DefaultExecutor;
  */
 public class startNode {
  public static void iniciarServidorNodeJS() throws IOException {
-    String directorioServidorNodeJS = "D:\\Descargas\\PruebaDev\\NodeYRender";
+    String directorioServidorNodeJS = "D:/Descargas/PruebaDev/NodeYRender";
     String comandoServidorNodeJS = "yarn dev";
 
     // Navegar al directorio del servidor Node.js

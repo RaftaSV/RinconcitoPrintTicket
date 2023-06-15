@@ -30,7 +30,7 @@ public class MainTicket {
             public void run() {
                 // Iniciar servidor Node.js con yarn dev
                 try {
-                  // node.iniciarServidorNodeJS();
+                  node.iniciarServidorNodeJS();
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -43,7 +43,7 @@ public class MainTicket {
             public void run() {
                 // Iniciar aplicación React.js con yarn start
                 try {
-                  // react.iniciarAplicacionReactJS();  
+                  react.iniciarAplicacionReactJS();  
                 } catch (Exception e) {
                     System.out.println(e);
                 }
