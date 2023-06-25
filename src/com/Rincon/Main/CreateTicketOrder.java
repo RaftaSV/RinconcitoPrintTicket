@@ -81,7 +81,7 @@ public class CreateTicketOrder {
         if (orderType == 0) {
             builder.append("            Servicio en mesa: ").append(tableNumber).append("\n");
             if (customer.length() > 0) {
-                builder.append("          Cliente: ").append(customer).append("\n");
+                builder.append("            Cliente: ").append(customer).append("\n");
             }
         } else if (orderType == 1) {
             builder.append("            Servicio para llevar    ").append("\n");
@@ -91,7 +91,7 @@ public class CreateTicketOrder {
         } else {
             builder.append("          Servicio a domicilio    \n");
             if (customer.length() > 0) {
-                builder.append("    Cliente: ").append(customer).append("\n");
+                builder.append("            Cliente: ").append(customer).append("\n");
             }
 
         }
@@ -136,7 +136,7 @@ public class CreateTicketOrder {
             builder.append("\n");
             builder.append("Numero de telefono: ").append(numberPhone).append("\n");
             builder.append("\n");
-            builder.append("          Direccion         ").append("\n");
+            builder.append("               Direccion         ").append("\n");
             if (address.length() > 41) {
                 int numLineasDireccion = (int) Math.ceil(address.length() / 41.0);
                 for (int i = 0; i < numLineasDireccion; i++) {
@@ -144,6 +144,9 @@ public class CreateTicketOrder {
                     String lineaDireccion = address.substring(i * 41, endIndex);
                     builder.append(lineaDireccion).append("\n");
                 }
+            } else {
+                builder.append(address);
+                builder.append("\n");
             }
             builder.append("\n");
             builder.append("               Otros Detalles      ").append("\n");
@@ -155,12 +158,15 @@ public class CreateTicketOrder {
                     String lineaDetalles = otherDetail.substring(startIndex, endIndex);
                     builder.append(lineaDetalles).append("\n");
                 }
+            } else {
+                builder.append(otherDetail);
+                builder.append('\n');
             }
 
         } else {
             if (otherDetail.length() > 0) {
                 builder.append("\n");
-              builder.append("               Otros Detalles      ").append("\n");
+                builder.append("               Otros Detalles      ").append("\n");
                 if (otherDetail.length() > 41) {
                     int numLineasDetalles = (int) Math.ceil(otherDetail.length() / 41.0);
                     for (int i = 0; i < numLineasDetalles; i++) {
@@ -169,7 +175,11 @@ public class CreateTicketOrder {
                         String lineaDetalles = otherDetail.substring(startIndex, endIndex);
                         builder.append(lineaDetalles).append("\n");
                     }
+                } else {
+                    builder.append(otherDetail);
+                    builder.append('\n');
                 }
+
             }
         }
         builder.append("\n");
