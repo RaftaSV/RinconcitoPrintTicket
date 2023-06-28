@@ -23,7 +23,7 @@ public class orderModel {
     private String numberPhone;
     private String otherDetail;
     private int tableId;
-    private int numberTable;
+    private String numberTable;
     private int userId;
     private String user;
     private int orderStatus;

@@ -5,6 +5,7 @@ import com.Rincon.Entidades.orderDetailModel;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -13,13 +14,14 @@ import javax.print.*;
 public class CreateTicketOrder {
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
+    ArrayList<orderDetailModel> newOrder = null;
 
     public void imprimir(int id) {
         try {
             StringBuilder builder = new StringBuilder();
 
             clsOrder order = new clsOrder();
-            ArrayList<orderDetailModel> newOrder = order.obtenerOrdenes(id);
+            newOrder = order.obtenerOrdenes(id);
             int orderId = 0;
             Time orderTime = null;
             Date orderDate = null;
@@ -29,7 +31,7 @@ public class CreateTicketOrder {
             String customer = null;
             String userName = null;
             String otherDetail = null;
-            int tableNumber = 0;
+            String tableNumber = null;
             double total = 0;
             for (orderDetailModel i : newOrder) {
                 orderId = i.getOrderId();
@@ -57,7 +59,7 @@ public class CreateTicketOrder {
                 System.out.println("Error al crear el archivo: " + e.getMessage());
             }
 
-            imprimirArchivo(filePath);
+            imprimirArchivo(filePath, id);
 
         } catch (Exception e) {
             System.out.println("Error al imprimir: " + e.getMessage());
@@ -70,14 +72,14 @@ public class CreateTicketOrder {
             Time orderTime,
             int orderId,
             int orderType,
-            int tableNumber,
+            String tableNumber,
             String userName,
             String customer) {
-        builder.append("            El Rincocito Mexicano     \n");
+        builder.append("            El Rinconcito Mexicano     \n");
         builder.append("               Orden numero: ").append(orderId).append("\n");
         builder.append("               Fecha: ").append(orderDate.toString()).append("\n");
-        builder.append("               Hora: ").append(orderTime.toLocalTime()).append("\n");
-        builder.append("             Mesero: ").append(userName).append("\n");
+        builder.append("                Hora: ").append(orderTime.toLocalTime()).append("\n");
+        builder.append("              Mesero: ").append(userName).append("\n");
         if (orderType == 0) {
             builder.append("            Servicio en mesa: ").append(tableNumber).append("\n");
             if (customer.length() > 0) {
@@ -190,7 +192,7 @@ public class CreateTicketOrder {
         builder.append("\n");
     }
 
-    private void imprimirArchivo(String filePath) {
+    private void imprimirArchivo(String filePath, int id) {
         FileInputStream inputStream = null;
 
         try {
@@ -213,6 +215,14 @@ public class CreateTicketOrder {
                 printJob.print(document, null);
                 byte[] cutP = new byte[]{0x1d, 'V', 1};
                 cutPaper(cutP);
+                clsOrder order = new clsOrder();
+
+                try {
+                    order.updateOrderDetails(newOrder);
+                } catch (SQLException e) {
+                    System.out.println("Error al actualizar los detalles de la orden: " + e.getMessage());
+                }
+
             } catch (PrintException ex) {
                 ex.printStackTrace();
             }

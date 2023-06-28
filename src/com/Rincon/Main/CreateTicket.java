@@ -60,7 +60,7 @@ public class CreateTicket {
     }
 
     private void buildHeader(StringBuilder builder, Date fecha, Time hora, int idFactura, String cajero) {
-        builder.append("            El Rincocito Mexicano     \n");
+        builder.append("            El Rinconcito Mexicano     \n");
         builder.append("              Barrio el Centro,  \n");
         builder.append("        Nueva Concepcion, Chalatenango\n");
         builder.append("               Fecha: ").append(fecha.toString()).append("\n");

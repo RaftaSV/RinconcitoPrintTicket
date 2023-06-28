@@ -18,6 +18,7 @@ public class MainTicket {
         Connection conectar = con.retornarConexion();
         CreateTicket create = new CreateTicket();
         CreateTicketOrder createTicketOrder = new CreateTicketOrder();
+        CreateTicketOrderAddMoreProducts moreProducts = new CreateTicketOrderAddMoreProducts();
         String idTicket = null;
         int idOrder = 0;
         clsOrder order = new clsOrder();
@@ -28,7 +29,7 @@ public class MainTicket {
             public void run() {
                 // Iniciar servidor Node.js con yarn dev
                 try {
-                  node.iniciarServidorNodeJS();
+                 // node.iniciarServidorNodeJS();
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -41,7 +42,7 @@ public class MainTicket {
             public void run() {
                 // Iniciar aplicación React.js con yarn start
                 try {
-                  react.iniciarAplicacionReactJS();  
+                 // react.iniciarAplicacionReactJS();  
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -71,8 +72,8 @@ public class MainTicket {
                         resultado.close();
                     } catch (Exception e) {
                         System.out.println(e);
-                    }
-                    try {
+                    }                  
+                     try {
                         ArrayList<orderModel> newOrder = order.obtenerOrdenes();
 
                         for (orderModel orderid : newOrder) {
@@ -81,6 +82,21 @@ public class MainTicket {
 
                         if (idOrder != 0) {
                             createTicketOrder.imprimir(idOrder);
+                            order.updateOrder(idOrder);
+                            idOrder = 0;
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
+                     try {
+                        ArrayList<orderModel> newOrder = order.obtenerOrdenesAgregadoProductos();
+
+                        for (orderModel orderid : newOrder) {
+                            idOrder = orderid.getOrderId();
+                        }
+
+                        if (idOrder != 0) {
+                            moreProducts.imprimir(idOrder);
                             order.updateOrder(idOrder);
                             idOrder = 0;
                         }
